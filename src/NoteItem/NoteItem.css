@@ -1,0 +1,10 @@
+.NoteItem{
+    width:100%;
+}
+
+@media only screen and (min-width:960px){
+    .NoteItem{
+        width:69%;
+        border:1px red solid;
+    }
+    }

@@ -1,0 +1,27 @@
+.NoteList{
+    width:100%;
+}
+
+ul{
+    list-style-type: none;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+.NoteList__note-item{
+    text-align:left;
+    border:1px solid #000;
+    width: 90%;
+    margin: 1em auto;
+    padding: 1em;
+}
+
+@media only screen and (min-width:960px){
+.NoteList{
+    width:69%;
+    border:1px red solid;
+}
+}
