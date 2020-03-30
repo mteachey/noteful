@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-//import { format } from 'date-fns'
+import { format } from 'date-fns'
 //import NoteItem from '../NoteItem/NoteItem';
 import './NoteList.css'
 
@@ -26,8 +26,8 @@ class NoteList extends Component {
         <h2>Notes</h2>
         <ul>
         {selectedNotesObj.map(note =>
-          <li key={note.id} className="NoteList__note-item">    
-            <div className="NoteList__note-item-info note-item">
+          <li key={note.id} className="NoteList__note-item note-item">    
+            <div className="NoteList__note-item-info ">
                 <h3>
                     <Link to={`/note/${note.id}`}
                         onClick={() => this.props.handleNoteSelected('note', note.folderId)}> 
@@ -35,7 +35,7 @@ class NoteList extends Component {
 
                     </Link>
                 </h3>
-                <p>Date modified {note.modified}</p>
+                <p>Date modified {format(new Date(note.modified), 'Do MM yyyy')}</p>
             </div>
             <button className="NoteList__button delete_button">Delete</button>
           </li>

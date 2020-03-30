@@ -39,7 +39,7 @@ class Sidebar extends Component {
                    this.props.handleGoBack('folders')
                    }}>    
                 Go Back</button>
-                <p>{folderSelectedName}</p>
+                <p>You are looking at a note in the {folderSelectedName} folder</p>
             </div>
         )
     }

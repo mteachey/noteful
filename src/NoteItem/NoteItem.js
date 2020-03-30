@@ -1,4 +1,5 @@
 import React from 'react';
+import { format } from 'date-fns'
 import './NoteItem.css';
 
 
@@ -15,7 +16,7 @@ export default function NoteItem(props) {
             <div className="note-item">
                 <div>
                     <h2>{notesItem.name}</h2>
-                    <p>{notesItem.modified}</p>
+                    <p>{format(new Date(notesItem.modified), 'Do MMM yyyy')}</p>
                 </div>
                 <button className="delete_button">Delete Note</button>
             </div>
