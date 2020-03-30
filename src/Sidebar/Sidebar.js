@@ -25,17 +25,14 @@ class Sidebar extends Component {
       </div>
     );}
     else{
-       // let folderSelectedName = 
-       console.log(`this is the folder id ${this.props.folderSelected}`)
+       
        let folderSelectedName = folderObj[folderObj.map(folder => folder.id).findIndex((f,i)=> f===this.props.folderOfCurrentNote)].name;
-       console.log(`this is the name ${folderSelectedName}`);
+      
     
         return(
             <div className='Sidebar'>
                 <button
                    onClick={() => {
-                  // history.push('/')
-                   console.log(`this was clicked ${this.props.sideBarType}`);    
                    this.props.handleGoBack('folders')
                    }}>    
                 Go Back</button>
