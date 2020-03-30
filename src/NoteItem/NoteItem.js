@@ -4,7 +4,7 @@ import './NoteItem.css';
 
 export default function NoteItem(props) {
    
-        const notesObj = props.notes.notes;
+       const notesObj = props.notes.notes;
        
        const notesItem = notesObj.find(n =>
            n.id === props.noteIdMatch.noteId

@@ -19,9 +19,7 @@ ul{
     padding: 1em;
 }
 
-@media only screen and (min-width:960px){
-.NoteList{
-    width:69%;
-    border:1px red solid;
+.add_note{
+    width:300px;
 }
-}
+

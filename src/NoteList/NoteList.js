@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+//import { format } from 'date-fns'
 //import NoteItem from '../NoteItem/NoteItem';
 import './NoteList.css'
 
@@ -11,17 +12,14 @@ class NoteList extends Component {
   render() {
     const notesObj = this.props.notes.notes;
     const { folderSelected } = this.props;
-    //.map((file, key) => <ListItem {...file} key={key} />);
-    console.log(this.props.notes.folders[1].id);
     let selectedNotesObj={};
+    //note.modified.toLocaleDateString()
      if (folderSelected==='All'){
         selectedNotesObj=notesObj;
      }
      else{
         selectedNotesObj = notesObj.filter(note=>note.folderId===folderSelected);
-        console.log(selectedNotesObj);
      }
-     
 
     return (
       <section className='NoteList'>
@@ -30,14 +28,18 @@ class NoteList extends Component {
         {selectedNotesObj.map(note =>
           <li key={note.id} className="NoteList__note-item">      
             <h3>
-                <Link to={`/note/${note.id}`}>
+                <Link to={`/note/${note.id}`}
+                     onClick={() => this.props.handleNoteSelected('note', note.folderId)}> 
                      {note.name}
+
                  </Link>
             </h3>
-            <p>{note.modified}</p>
+            <p>Date modified {note.modified}
+              </p>
           </li>
         )}
         </ul>
+        <button className="add_note">Add Note</button>
       </section>
     );
   }

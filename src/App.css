@@ -19,3 +19,28 @@ header a {
   text-decoration: none;
   color: #000;
 }
+
+button {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-color: #000;
+  font-size: 17px;
+  margin: 10px auto;
+}
+
+a:-webkit-any-link{
+  color:blue;
+}
+
+@media only screen and (min-width:960px){
+  .main-sidebar{
+    width:30%;
+    border:1px purple solid;
+  }
+  .main-main{
+    width:65%;
+    border:1px red solid;
+  }
+}
+
