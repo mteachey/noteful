@@ -35,7 +35,7 @@ class NoteList extends Component {
 
                     </Link>
                 </h3>
-                <p>Date modified {format(new Date(note.modified), 'Do MM yyyy')}</p>
+                <p>Date modified {format(new Date(note.modified), 'Do MMM yyyy')}</p>
             </div>
             <button className="NoteList__button delete_button">Delete</button>
           </li>
