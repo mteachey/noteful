@@ -11,8 +11,14 @@ export default function NoteItem(props) {
          )
 
         return (
-          <section className='NoteItem'>
-            <h2>{notesItem.name}</h2>
+          <section className='NoteItem__note-item'>
+            <div className="note-item">
+                <div>
+                    <h2>{notesItem.name}</h2>
+                    <p>{notesItem.modified}</p>
+                </div>
+                <button className="delete_button">Delete Note</button>
+            </div>
             <p>{notesItem.content}</p>
           </section>
         );

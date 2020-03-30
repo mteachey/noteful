@@ -26,20 +26,22 @@ class NoteList extends Component {
         <h2>Notes</h2>
         <ul>
         {selectedNotesObj.map(note =>
-          <li key={note.id} className="NoteList__note-item">      
-            <h3>
-                <Link to={`/note/${note.id}`}
-                     onClick={() => this.props.handleNoteSelected('note', note.folderId)}> 
-                     {note.name}
+          <li key={note.id} className="NoteList__note-item">    
+            <div className="NoteList__note-item-info note-item">
+                <h3>
+                    <Link to={`/note/${note.id}`}
+                        onClick={() => this.props.handleNoteSelected('note', note.folderId)}> 
+                        {note.name}
 
-                 </Link>
-            </h3>
-            <p>Date modified {note.modified}
-              </p>
+                    </Link>
+                </h3>
+                <p>Date modified {note.modified}</p>
+            </div>
+            <button className="NoteList__button delete_button">Delete</button>
           </li>
         )}
         </ul>
-        <button className="add_note">Add Note</button>
+        <button className="NoteList__button add_note">Add Note</button>
       </section>
     );
   }

@@ -1,10 +1,11 @@
-.NoteItem{
-    width:100%;
+.NoteItem__note-item{
+    text-align:left;
 }
 
+.NoteItem__note-item .note-item{
+    margin:0;
+    width:100%;
+}
 @media only screen and (min-width:960px){
-    .NoteItem{
-        width:69%;
-        border:1px red solid;
-    }
+
     }
