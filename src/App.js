@@ -48,13 +48,15 @@ handleNoteSelected=(display,folderId, folderToGoBackTo)=>{
 }
 
 deleteNote = noteId => {
+  this.updateSidebarDisplay('folders');
   const newNotes = this.state.notes.filter(n =>
   n.id !== noteId
   )
+  
    this.setState({
-   notes: newNotes
+     notes: newNotes
    })
-  //this.props.history.push('/')
+  
   }
 
 componentDidMount() {

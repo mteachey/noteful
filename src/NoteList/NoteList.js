@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns'
 import NotefulContext from '../NotefulContext.js'
+import DeleteButton from '../DeleteButton/DeleteButton';
 //import NoteItem from '../NoteItem/NoteItem';
 import './NoteList.css'
-
-
-//const moment = require('moment');
 
 class NoteList extends Component {
   static contextType = NotefulContext;
@@ -16,7 +14,7 @@ class NoteList extends Component {
     const { folderSelected } = this.context;
     let selectedNotesObj={};
     let folderToGoBackTo = '';
-    //note.modified.toLocaleDateString()
+    
      if (folderSelected==='All'){
         selectedNotesObj=notesObj;
         folderToGoBackTo = 'All';
@@ -42,7 +40,10 @@ class NoteList extends Component {
                 </h3>
                 <p>Date modified {format(new Date(note.modified), 'MMM yyyy')}</p>
             </div>
-            <button className="NoteList__button delete_button">Delete</button>
+            <DeleteButton
+                  noteId={note.id}
+                  push={this.props.history.push}
+                 />
           </li>
         )}
         </ul>

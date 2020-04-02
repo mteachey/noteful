@@ -1,5 +1,5 @@
 import React from 'react';
-import { format } from 'date-fns'
+//import { format } from 'date-fns'
 import './DeleteButton.css';
 import NotefulContext from '../NotefulContext.js';
 
@@ -22,11 +22,8 @@ function deleteNoteRequest(noteId, callback){
       return res.json()
     })
     .then(data => {
-      console.log(data);
-      console.log(`this delete call worked`);
       // call the callback when the request is successful
-      // this is where the App component can remove it from state
-      
+      // this is where the App component can remove it from state      
       callback(noteId)
     })
     .catch(error => {
@@ -42,8 +39,9 @@ export default function DeleteButton(props) {
                 onClick={() => {
                 deleteNoteRequest(
                 props.noteId,
-                context.deleteNote,
-                )
+                context.deleteNote);
+                props.push('/');
+                
                 }}>
                 Delete Note 
             </button>

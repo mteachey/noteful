@@ -9,7 +9,7 @@ class Sidebar extends Component {
    render(){
     const folderObj = this.context.folders;
     const { folderOfCurrentNote } = this.context;
-    console.log(`this is the folderN ${folderOfCurrentNote}`);
+   
     if(this.context.sideBarType==='folders')
     {
     return ( 
@@ -31,10 +31,7 @@ class Sidebar extends Component {
     else{
       
       let folderSelectedName = folderObj[folderObj.map(folder => folder.id).findIndex((f,i)=> f===folderOfCurrentNote)].name;
-      
-      // let folderSelectedName ='we will fix';
-      
-    
+ 
         return(
             <div className='Sidebar'>
                 <button

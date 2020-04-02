@@ -34,6 +34,7 @@ class NoteItem extends Component{
                 </div>
                 <DeleteButton
                   noteId={noteId}
+                  push={this.props.history.push}
                  />
             </div>
             <p>{notesItem.content}</p>
