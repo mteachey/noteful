@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns'
+import NotefulContext from '../NotefulContext.js'
 //import NoteItem from '../NoteItem/NoteItem';
 import './NoteList.css'
 
@@ -8,17 +9,21 @@ import './NoteList.css'
 //const moment = require('moment');
 
 class NoteList extends Component {
+  static contextType = NotefulContext;
    
   render() {
-    const notesObj = this.props.notes.notes;
-    const { folderSelected } = this.props;
+    const notesObj = this.context.notes.notes;
+    const { folderSelected } = this.context;
     let selectedNotesObj={};
+    let folderToGoBackTo = '';
     //note.modified.toLocaleDateString()
      if (folderSelected==='All'){
         selectedNotesObj=notesObj;
+        folderToGoBackTo = 'All';
      }
      else{
         selectedNotesObj = notesObj.filter(note=>note.folderId===folderSelected);
+        
      }
 
     return (
@@ -30,7 +35,7 @@ class NoteList extends Component {
             <div className="NoteList__note-item-info ">
                 <h3>
                     <Link to={`/note/${note.id}`}
-                        onClick={() => this.props.handleNoteSelected('note', note.folderId)}> 
+                        onClick={() => this.context.handleNoteSelected('note', note.folderId, folderToGoBackTo)}> 
                         {note.name}
 
                     </Link>

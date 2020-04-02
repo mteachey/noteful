@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import './Sidebar.css'
+import NotefulContext from '../NotefulContext.js'
 
 class Sidebar extends Component {
+  static contextType = NotefulContext;
     
    render(){
-    const folderObj = this.props.notes.folders;
-    if(this.props.sideBarType==='folders')
+    const folderObj = this.context.notes.folders;
+    if(this.context.sideBarType==='folders')
     {
     return ( 
       <div className='Sidebar'>
@@ -15,7 +17,7 @@ class Sidebar extends Component {
         {folderObj.map(folder =>
             <NavLink to={`/folder/${folder.id}`} key={folder.id} >
                 <li className="FolderList__folder-item"
-                    onClick={() => this.props.handleFolderSelected(folder.id)}>           
+                    onClick={() => this.context.updateFolderSelected(folder.id)}>           
                     {folder.name}                    
                 </li>
             </NavLink>
@@ -26,14 +28,16 @@ class Sidebar extends Component {
     );}
     else{
        
-       let folderSelectedName = folderObj[folderObj.map(folder => folder.id).findIndex((f,i)=> f===this.props.folderOfCurrentNote)].name;
+       let folderSelectedName = folderObj[folderObj.map(folder => folder.id).findIndex((f,i)=> f===this.context.folderOfCurrentNote)].name;
+       //let folderSelectedName ='we will fix';
       
     
         return(
             <div className='Sidebar'>
                 <button
                    onClick={() => {
-                   this.props.handleGoBack('folders')
+                    this.context.updateSidebarDisplay('folders');
+                    this.props.history.goBack()
                    }}>    
                 Go Back</button>
                 <p>You are looking at a note in the {folderSelectedName} folder</p>

@@ -1,14 +1,27 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { format } from 'date-fns'
 import './NoteItem.css';
+import NotefulContext from '../NotefulContext.js'
 
 
-export default function NoteItem(props) {
-   
-       const notesObj = props.notes.notes;
+//export default function NoteItem(props) {
+class NoteItem extends Component{
+  static defaultProps = {
+    history: {
+      goBack: () => { }
+    },
+    match: {
+      params: {}
+    }
+  }
+
+  static contextType = NotefulContext;
+  render(){
+       const { noteId } = this.props.match.params
+       const notesObj = this.context.notes.notes;
        
        const notesItem = notesObj.find(n =>
-           n.id === props.noteIdMatch.noteId
+           n.id === noteId
          )
 
         return (
@@ -26,6 +39,9 @@ export default function NoteItem(props) {
         );
 
 }
+}
+
+export default NoteItem;
 
 
 

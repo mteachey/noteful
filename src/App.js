@@ -4,6 +4,7 @@ import './App.css';
 import Sidebar from './Sidebar/Sidebar';
 import NoteList from './NoteList/NoteList';
 import NoteItem from './NoteItem/NoteItem';
+import NotefulContext from './NotefulContext.js'
 import NOTES from './notes.js'
 
 
@@ -13,33 +14,54 @@ class App extends Component{
     this.state = {
       folderSelected: 'All',
       sideBarType:'folders',
-      folderOfCurrentNote:'None'
+      folderOfCurrentNote:'None',
+      notes:NOTES,
+     
     };
   }
 
-updateFolderSelected(folder) {
-  console.log(`uFS ran and this is the current value of the selected folder${folder}`);
+updateFolderSelected=folder=> {
     this.setState({
       folderSelected: folder
     })
 }
 
-updatefolderOfCurrentNote(folder) {
-  console.log(`uFCN ran and this is the current value of the note's folder${folder}`);
+updatefolderOfCurrentNote=folder=> {
     this.setState({
       folderOfCurrentNote: folder
     })
 }
 
-updateSidebarDisplay(display) {
-  console.log(`uSD ran and this is he current value${display}`);
+updateSidebarDisplay=display=> {
     this.setState({
       sideBarType:display
     })
 }
 
+handleNoteSelected=(display,folderId, folderToGoBackTo)=>{
+  this.updateSidebarDisplay(display)
+  this.updatefolderOfCurrentNote(folderId)
+  if(folderToGoBackTo==='All')
+  { this.updateFolderSelected('All')}
+  else{ this.updateFolderSelected(folderId)}
+}
+
   render(){
+    //const {folderSelected, sideBarType,folderOfCurrentNote} = this.state
+   const contextValue ={
+         notes:this.state.notes,
+         folderSelected:this.state.folderSelected,
+         sideBarType:this.state.sideBarType,
+         folderOfCurrentNote:this.state.folderSelected,
+         updateFolderSelected:this.updateFolderSelected,
+         updatefolderOfCurrentNote:this.updatefolderOfCurrentNote,
+         updateSidebarDisplay:this.updateSidebarDisplay,
+         handleNoteSelected:this.handleNoteSelected,
+
+
+   }
     return (
+      
       <div className="App">
         <header>
          <h1>
@@ -53,88 +75,42 @@ updateSidebarDisplay(display) {
          </h1>
         </header>
         <main>
+        <NotefulContext.Provider value={contextValue}>
           <section className="main-sidebar">
               <Route
                   exact
                   path='/'
-                  render={({history}) => {
-                    return(
-                  <Sidebar notes={NOTES}
-                          folderSelected={this.state.folderSelected}
-                          sideBarType={this.state.sideBarType}
-                          folderOfCurrentNote={this.state.folderOfCurrentNote}
-                          handleFolderSelected={folderId=>{
-                            this.updateFolderSelected(folderId)
-                            this.updatefolderOfCurrentNote(folderId)}}
-                          handleSidebarDisplay={display=>this.updateSidebarDisplay(display)}
-                  />)}}
+                  component={Sidebar}
               /> 
               <Route
                 exact
                 path='/folder/:folderId'
-                render={({history}) => {
-                  return(
-                <Sidebar notes={NOTES}
-                        folderSelected={this.state.folderSelected}
-                        folderOfCurrentNote={this.state.folderOfCurrentNote}
-                        sideBarType={this.state.sideBarType}
-                        handleFolderSelected={folderId=>this.updateFolderSelected(folderId)}
-                        handleSidebarDisplay={display=>this.updateSidebarDisplay(display)}
-                />)}}
+                component={Sidebar}
               />    
               <Route
               exact
               path='/note/:noteId'
-              render={({history}) => {
-                return(
-              <Sidebar notes={NOTES}
-                      folderSelected={this.state.folderSelected}
-                      folderOfCurrentNote={this.state.folderOfCurrentNote}
-                      sideBarType={this.state.sideBarType}
-                      handleGoBack={display=>{this.updateSidebarDisplay(display);
-                        history.goBack()}}
-              />)}}
+              component={Sidebar}
           />                  
           </section>
           <section className="main-main">
             <Route
                   exact
-                  path='/'
-                  render={() =>            
-                  <NoteList notes={NOTES}
-                            folderSelected={this.state.folderSelected}
-                            folderOfCurrentNote={this.state.folderOfCurrentNote}
-                            handleNoteSelected={(display,folderId)=>{
-                            this.updateSidebarDisplay(display)
-                            this.updatefolderOfCurrentNote(folderId)
-                            }}
-                  />}
+                  path='/'        
+                  component={NoteList}
               />   
               <Route
                   exact
-                  path='/folder/:folderId'
-                  render={() =>            
-                  <NoteList notes={NOTES}
-                            folderSelected={this.state.folderSelected}
-                            handleNoteSelected={(display,folderId)=>{
-                              this.updateSidebarDisplay(display)
-                              this.updateFolderSelected(folderId)
-                              this.updatefolderOfCurrentNote(folderId)
-                            }}
-                  />}
-              />             
+                  path='/folder/:folderId'         
+                  component={NoteList}
+              />   
               <Route
                   path='/note/:noteId'
-                  render={ routeProps =>{
-                    return(
-                    <NoteItem notes={NOTES}
-                              noteIdMatch={routeProps.match.params} 
-                              folderSelected={this.state.folderSelected}   
-                                       
-                    />)}
-                  }       
-                />  
+                  component={NoteItem}
+                />          
+              
             </section>
+            </NotefulContext.Provider>
           </main>
       </div>
     );
@@ -142,4 +118,9 @@ updateSidebarDisplay(display) {
 }
 
 export default App;
+
+/*<Route
+                  path='/note/:noteId'
+                  component={NoteItem}
+                />at end of last section  */
 
