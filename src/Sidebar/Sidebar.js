@@ -7,7 +7,9 @@ class Sidebar extends Component {
   static contextType = NotefulContext;
     
    render(){
-    const folderObj = this.context.notes.folders;
+    const folderObj = this.context.folders;
+    const { folderOfCurrentNote } = this.context;
+    console.log(`this is the folderN ${folderOfCurrentNote}`);
     if(this.context.sideBarType==='folders')
     {
     return ( 
@@ -27,9 +29,10 @@ class Sidebar extends Component {
       </div>
     );}
     else{
-       
-       let folderSelectedName = folderObj[folderObj.map(folder => folder.id).findIndex((f,i)=> f===this.context.folderOfCurrentNote)].name;
-       //let folderSelectedName ='we will fix';
+      
+      let folderSelectedName = folderObj[folderObj.map(folder => folder.id).findIndex((f,i)=> f===folderOfCurrentNote)].name;
+      
+      // let folderSelectedName ='we will fix';
       
     
         return(

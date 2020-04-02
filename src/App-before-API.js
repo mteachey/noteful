@@ -15,8 +15,7 @@ class App extends Component{
       folderSelected: 'All',
       sideBarType:'folders',
       folderOfCurrentNote:'None',
-      notes:NOTES.notes,
-      folders:NOTES.folders,
+      notes:NOTES,
      
     };
   }
@@ -47,93 +46,17 @@ handleNoteSelected=(display,folderId, folderToGoBackTo)=>{
   else{ this.updateFolderSelected(folderId)}
 }
 
-deleteNote = noteId => {
-  const newNotes = this.state.notes.filter(n =>
-  n.id !== noteId
-  )
-   this.setState({
-   notes: newNotes
-   })
-  //this.props.history.push('/')
-  }
-
-componentDidMount() {
-
-  const endpoint = 'http://localhost:9090/folders';
-  
-  const url = endpoint;
-
-  console.log(url);
-
-  fetch(`http://localhost:9090/folders`, {
-    method: 'GET',
-    headers: {
-      'content-type': 'application/json'
-    },
-  })
-    .then(res => {
-      if(!res.ok) {
-        throw new Error('Something went wrong, please try again later.');
-      }
-      return res;
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(`this worked`);
-      console.log(data);
-      this.setState({
-        folders:data,
-       });
-    })
-    .catch(err => {
-      console.log(`there wa an error`)
-     // this.setState({
-     //   error: err.message
-    //  });
-    });
-
-    fetch(`http://localhost:9090/notes`, {
-    method: 'GET',
-    headers: {
-      'content-type': 'application/json'
-    },
-  })
-    .then(res => {
-      if(!res.ok) {
-        throw new Error('Something went wrong, please try again later.');
-      }
-      return res;
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(`this worked too with notes`);
-      console.log(data);
-      this.setState({
-        notes:data,
-       });
-    })
-    .catch(err => {
-      console.log(`there wa an error`)
-     // this.setState({
-     //   error: err.message
-    //  });
-    });
-}
-
-
   render(){
     //const {folderSelected, sideBarType,folderOfCurrentNote} = this.state
    const contextValue ={
          notes:this.state.notes,
-         folders:this.state.folders,
          folderSelected:this.state.folderSelected,
          sideBarType:this.state.sideBarType,
-         folderOfCurrentNote:this.state.folderOfCurrentNote,
+         folderOfCurrentNote:this.state.folderSelected,
          updateFolderSelected:this.updateFolderSelected,
          updatefolderOfCurrentNote:this.updatefolderOfCurrentNote,
          updateSidebarDisplay:this.updateSidebarDisplay,
          handleNoteSelected:this.handleNoteSelected,
-         deleteNote:this.deleteNote,
 
 
    }

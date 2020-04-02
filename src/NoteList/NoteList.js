@@ -12,7 +12,7 @@ class NoteList extends Component {
   static contextType = NotefulContext;
    
   render() {
-    const notesObj = this.context.notes.notes;
+    const notesObj = this.context.notes;
     const { folderSelected } = this.context;
     let selectedNotesObj={};
     let folderToGoBackTo = '';

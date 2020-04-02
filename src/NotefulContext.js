@@ -5,7 +5,7 @@ const NotefulContext = React.createContext({
   sideBarType:'folders',
   folderOfCurrentNote:'None',
   notes: {},
-  //folders:[],
+  folders:[],
   updateFolderSelected:() => {},
   updatefolderOfCurrentNote:() => {},
   updateSidebarDisplay:() => {},

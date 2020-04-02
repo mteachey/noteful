@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { format } from 'date-fns'
 import './NoteItem.css';
-import NotefulContext from '../NotefulContext.js'
+import DeleteButton from '../DeleteButton/DeleteButton';
+import NotefulContext from '../NotefulContext.js';
 
 
-//export default function NoteItem(props) {
 class NoteItem extends Component{
   static defaultProps = {
     history: {
@@ -18,7 +18,7 @@ class NoteItem extends Component{
   static contextType = NotefulContext;
   render(){
        const { noteId } = this.props.match.params
-       const notesObj = this.context.notes.notes;
+       const notesObj = this.context.notes;
        
        const notesItem = notesObj.find(n =>
            n.id === noteId
@@ -32,7 +32,9 @@ class NoteItem extends Component{
                     <p>{format(new Date(notesItem.modified), 'MMM yyyy')}
                     </p>
                 </div>
-                <button className="delete_button">Delete Note</button>
+                <DeleteButton
+                  noteId={noteId}
+                 />
             </div>
             <p>{notesItem.content}</p>
           </section>
