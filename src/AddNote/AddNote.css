@@ -1,0 +1,58 @@
+.add-note-form {
+    margin-top: 35px;
+}
+
+h2{
+    margin-block-start: 15px;
+    margin-block-end: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form__button{
+    width:150px;
+    margin:15px 10px;
+    padding: 10px;
+    color:#fff;
+    background-color:#000;
+}
+
+input[type=text], select {
+    width: 350px;
+    font-size: 17px;
+    margin-right: 45px;
+}
+
+textarea {
+    width: 350px;
+    height: 150px;
+    font-size: 17px;
+    margin-right: 45px;
+}
+
+label {
+    margin-right: 10px;
+    width: 200px;
+    display: inline-block;
+    text-align: right;
+}
+
+button[type=reset] {
+    width: 80px;
+    padding: 10px 5px;
+    color:#000;
+    background-color:#fff;
+}
+
+.form__button:disabled {
+    color: darkgray;
+    background-color: lightgray;
+}
+
+.error {
+    margin-top: 10px;
+    margin-left: 40px;
+    color: purple;
+}

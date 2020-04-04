@@ -10,6 +10,7 @@ const NotefulContext = React.createContext({
   updatefolderOfCurrentNote:() => {},
   updateSidebarDisplay:() => {},
   addNote: () => {},
+  addFolder: () => {},
   deleteNote: () => {},
   deleteFolder: () => {},
   handleNoteSelected:()=>{},

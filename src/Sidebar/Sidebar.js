@@ -25,7 +25,7 @@ class Sidebar extends Component {
             </NavLink>
         )}
         </ul>
-        <button className="Sidebar__button add_button">Add Folder</button>
+        <NavLink to={`/add-folder`}><button className="Sidebar__button add_button">Add Folder</button></NavLink>
       </div>
     );}
     else{

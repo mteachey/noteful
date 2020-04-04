@@ -53,6 +53,7 @@ a:-webkit-any-link{
   }
   .main-main{
     width:68%;
+    margin: 0 auto;
     /*border:1px red solid;*/
   }
 }

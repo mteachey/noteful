@@ -4,6 +4,8 @@ import './App.css';
 import Sidebar from './Sidebar/Sidebar';
 import NoteList from './NoteList/NoteList';
 import NoteItem from './NoteItem/NoteItem';
+import AddFolder from './AddFolder/AddFolder.js';
+import AddNote from './AddNote/AddNote.js';
 import NotefulContext from './NotefulContext.js'
 import NOTES from './notes.js'
 
@@ -20,6 +22,22 @@ class App extends Component{
      
     };
   }
+
+addFolder = folder => {
+  console.log(`before update ${this.state.folders}`);
+    this.setState({
+      folders: [ ...this.state.folders, folder ],
+    })
+    console.log(`after update ${this.state.folders}`);
+}
+
+addNote = note => {
+  console.log(`before update ${this.state.notes}`);
+   this.setState({
+      notes: [ ...this.state.notes, note ],
+    })
+    console.log(`after update ${this.state.notes}`);
+}
 
 updateFolderSelected=folder=> {
     this.setState({
@@ -124,7 +142,7 @@ componentDidMount() {
 
 
   render(){
-    //const {folderSelected, sideBarType,folderOfCurrentNote} = this.state
+   //const {folderSelected, sideBarType,folderOfCurrentNote} = this.state
    const contextValue ={
          notes:this.state.notes,
          folders:this.state.folders,
@@ -136,9 +154,10 @@ componentDidMount() {
          updateSidebarDisplay:this.updateSidebarDisplay,
          handleNoteSelected:this.handleNoteSelected,
          deleteNote:this.deleteNote,
-
-
+         addFolder:this.addFolder,
+         addNote:this.addNote,
    }
+
     return (
       
       <div className="App">
@@ -170,7 +189,17 @@ componentDidMount() {
               exact
               path='/note/:noteId'
               component={Sidebar}
-          />                  
+              />    
+              <Route
+              exact
+              path='/add-folder'
+              component={Sidebar}
+              />     
+              <Route
+              exact
+              path='/add-note'
+              component={Sidebar}
+              />                  
           </section>
           <section className="main-main">
             <Route
@@ -186,8 +215,15 @@ componentDidMount() {
               <Route
                   path='/note/:noteId'
                   component={NoteItem}
-                />          
-              
+                />   
+                <Route
+                  path='/add-folder'
+                  component={AddFolder}
+                />  
+                <Route
+                  path='/add-note'
+                  component={AddNote}
+                />                       
             </section>
             </NotefulContext.Provider>
           </main>

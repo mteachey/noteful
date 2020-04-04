@@ -4,7 +4,8 @@ import { format } from 'date-fns'
 import NotefulContext from '../NotefulContext.js'
 import DeleteButton from '../DeleteButton/DeleteButton';
 //import NoteItem from '../NoteItem/NoteItem';
-import './NoteList.css'
+import './NoteList.css';
+import { NavLink } from 'react-router-dom'
 
 class NoteList extends Component {
   static contextType = NotefulContext;
@@ -47,7 +48,7 @@ class NoteList extends Component {
           </li>
         )}
         </ul>
-        <button className="NoteList__button add_note">Add Note</button>
+        <NavLink to={`/add-note`}><button className="NoteList__button add_note">Add Note</button></NavLink>      
       </section>
     );
   }
