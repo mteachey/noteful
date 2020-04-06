@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-//import PropTypes from 'prop-types';
-
 import ValidationError from "../ValidationError/ValidationError.js";
 import NotefulContext from '../NotefulContext.js'
 import './AddFolder.css'
@@ -79,13 +77,15 @@ class AddFolder extends Component {
       }
     }
   
-    //may need this eventhandler onSubmit={this.handleSubmit}
     render() {
       const nameError = this.validateName();
       
       return (
         <form className="add-folder-form" onSubmit={e => this.handleSubmit(e)}>
           <h2>Add Folder</h2>
+          <div className='Noteful__error' role='alert'>
+             {this.state.error && <p>Something didn't work, please try again</p>}
+          </div>
           <div className="form-group">
             <label htmlFor="name">Name *</label>
             <input

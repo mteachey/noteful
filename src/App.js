@@ -6,7 +6,9 @@ import NoteList from './NoteList/NoteList';
 import NoteItem from './NoteItem/NoteItem';
 import AddFolder from './AddFolder/AddFolder.js';
 import AddNote from './AddNote/AddNote.js';
-import NotefulContext from './NotefulContext.js'
+import NotefulContext from './NotefulContext.js';
+import NoteListError from './ErrorBoundaries/NoteListError.js'
+import SidebarError from './ErrorBoundaries/SidebarError.js'
 import NOTES from './notes.js'
 
 
@@ -19,6 +21,7 @@ class App extends Component{
       folderOfCurrentNote:'None',
       notes:NOTES.notes,
       folders:NOTES.folders,
+      error: null,
      
     };
   }
@@ -57,6 +60,8 @@ updateSidebarDisplay=display=> {
     })
 }
 
+
+
 handleNoteSelected=(display,folderId, folderToGoBackTo)=>{
   this.updateSidebarDisplay(display)
   this.updatefolderOfCurrentNote(folderId)
@@ -65,26 +70,27 @@ handleNoteSelected=(display,folderId, folderToGoBackTo)=>{
   else{ this.updateFolderSelected(folderId)}
 }
 
-deleteNote = noteId => {
-  this.updateSidebarDisplay('folders');
-  const newNotes = this.state.notes.filter(n =>
-  n.id !== noteId
-  )
-  
-   this.setState({
-     notes: newNotes
-   })
-  
+deleteNote = (noteId,error) => {
+  if (!error){
+    this.updateSidebarDisplay('folders');
+    const newNotes = this.state.notes.filter(n =>
+    n.id !== noteId
+    )
+    
+    this.setState({
+      notes: newNotes
+    })
   }
+  else if(error){
+    this.setState({
+      error: true,
+      });
+  }
+}
 
 componentDidMount() {
-
-  const endpoint = 'http://localhost:9090/folders';
-  
-  const url = endpoint;
-
-  console.log(url);
-
+  this.setState({ error: null })
+  //getting the folders
   fetch(`http://localhost:9090/folders`, {
     method: 'GET',
     headers: {
@@ -99,19 +105,19 @@ componentDidMount() {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(`this worked`);
-      console.log(data);
+      //console.log(data);
       this.setState({
         folders:data,
        });
     })
     .catch(err => {
-      console.log(`there wa an error`)
-     // this.setState({
-     //   error: err.message
-    //  });
+      console.log(`there was an error`)
+      this.setState({
+       error: err.message
+       });
     });
 
+    //getting the notes
     fetch(`http://localhost:9090/notes`, {
     method: 'GET',
     headers: {
@@ -126,17 +132,16 @@ componentDidMount() {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(`this worked too with notes`);
-      console.log(data);
+      //console.log(data);
       this.setState({
         notes:data,
        });
     })
     .catch(err => {
-      console.log(`there wa an error`)
-     // this.setState({
-     //   error: err.message
-    //  });
+      console.log(`there was an error`)
+       this.setState({
+        error: err.message
+        });
     });
 }
 
@@ -171,10 +176,14 @@ componentDidMount() {
              }}> 
            Noteful</Link>
          </h1>
+         <div className='Noteful__error' role='alert'>
+            {this.state.error && <p>Something didn't work, please try again</p>}
+          </div>
         </header>
         <main>
         <NotefulContext.Provider value={contextValue}>
           <section className="main-sidebar">
+            <SidebarError>
               <Route
                   exact
                   path='/'
@@ -199,32 +208,35 @@ componentDidMount() {
               exact
               path='/add-note'
               component={Sidebar}
-              />                  
+              />     
+            </SidebarError>             
           </section>
           <section className="main-main">
-            <Route
-                  exact
-                  path='/'        
-                  component={NoteList}
-              />   
-              <Route
-                  exact
-                  path='/folder/:folderId'         
-                  component={NoteList}
-              />   
-              <Route
-                  path='/note/:noteId'
-                  component={NoteItem}
+            <NoteListError>
+                <Route
+                    exact
+                    path='/'        
+                    component={NoteList}
                 />   
                 <Route
-                  path='/add-folder'
-                  component={AddFolder}
-                />  
+                    exact
+                    path='/folder/:folderId'         
+                    component={NoteList}
+                />   
                 <Route
-                  path='/add-note'
-                  component={AddNote}
-                />                       
-            </section>
+                    path='/note/:noteId'
+                    component={NoteItem}
+                  />   
+                  <Route
+                    path='/add-folder'
+                    component={AddFolder}
+                  />  
+                  <Route
+                    path='/add-note'
+                    component={AddNote}
+                  />     
+            </NoteListError>                  
+          </section>
             </NotefulContext.Provider>
           </main>
       </div>
@@ -234,8 +246,4 @@ componentDidMount() {
 
 export default App;
 
-/*<Route
-                  path='/note/:noteId'
-                  component={NoteItem}
-                />at end of last section  */
 

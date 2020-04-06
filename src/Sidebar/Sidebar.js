@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import './Sidebar.css'
-import NotefulContext from '../NotefulContext.js'
+import NotefulContext from '../NotefulContext.js';
+import PropTypes from 'prop-types';
 
 class Sidebar extends Component {
   static contextType = NotefulContext;
@@ -47,9 +48,14 @@ class Sidebar extends Component {
   }
 }
 
-Sidebar.defaultProps = {
-    handleFolderSelected: () => {},
-    handleSidebarDisplay:()=>{},
-  }
+Sidebar.propTypes = {
+  folders: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })),
+  folderOfCurrentNote:PropTypes.string,
+};
+
+
 
 export default Sidebar;

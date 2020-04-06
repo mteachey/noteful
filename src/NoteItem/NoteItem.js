@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import './NoteItem.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import NotefulContext from '../NotefulContext.js';
+import PropTypes from 'prop-types';
 
 
 class NoteItem extends Component{
@@ -43,6 +44,16 @@ class NoteItem extends Component{
 
 }
 }
+
+NoteItem.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+  })),
+  match:{params:PropTypes.string},
+};
 
 export default NoteItem;
 

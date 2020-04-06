@@ -5,7 +5,8 @@ import NotefulContext from '../NotefulContext.js'
 import DeleteButton from '../DeleteButton/DeleteButton';
 //import NoteItem from '../NoteItem/NoteItem';
 import './NoteList.css';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class NoteList extends Component {
   static contextType = NotefulContext;
@@ -54,8 +55,15 @@ class NoteList extends Component {
   }
 }
 
-NoteList.defaultProps = {
-    notes: []
-  };
+NoteList.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+  })),
+  folderSelected:PropTypes.string,
+};
+
 
 export default NoteList;

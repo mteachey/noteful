@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-//import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import ValidationError from "../ValidationError/ValidationError.js";
 import NotefulContext from '../NotefulContext.js'
@@ -117,24 +116,23 @@ class AddNote extends Component {
         } 
       }
   
-    //may need this eventhandler onSubmit={this.handleSubmit}
+    
     render() {
       const nameError = this.validateName();
       const contentError = this.validateContent();
-      //const folderError= this.validateFolderSelected()
-
+      
       const folderObj = this.context.folders;
 
      
      const folderOptions = folderObj.map((folder,i)=>
             <option value={folder.id} key={i}>{folder.name}</option>);
-       //(country, i) => <option value={country.name} key={i}>{country.name}</option>
-
-      // console.log(`this is the playFolder ${playFolder}`);
       
       return (
         <form className="add-note-form" onSubmit={e => this.handleSubmit(e)}>
           <h2>Add Note</h2>
+          <div className='Noteful__error' role='alert'>
+             {this.state.error && <p>Something didn't work, please try again</p>}
+          </div>
           <div className="form-group">
             <label htmlFor="name">Name *</label>
             <input
