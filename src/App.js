@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Route, Link } from 'react-router-dom';
 import './App.css';
+import { format } from 'date-fns'
 import Sidebar from './Sidebar/Sidebar';
 import NoteList from './NoteList/NoteList';
 import NoteItem from './NoteItem/NoteItem';
@@ -35,9 +36,11 @@ addFolder = folder => {
 }
 
 addNote = note => {
-  console.log(`before update ${this.state.notes}`);
+  let updatedNote = note = { ...note, 
+    date_modified:(format (new Date((note.date_modified).slice(0,10)), 'MMM yyyy' ))}
+   
    this.setState({
-      notes: [ ...this.state.notes, note ],
+      notes: [ ...this.state.notes, updatedNote ],
     })
     console.log(`after update ${this.state.notes}`);
 }
@@ -86,6 +89,15 @@ deleteNote = (noteId,error) => {
   }
 }
 
+formatDate = (notes)=>{
+  console.log(`formatdate ran`)
+  let updatedNotes = notes.map(note=>note={
+    ...note, 
+    date_modified:(format (new Date((note.date_modified).slice(0,10)), 'MMM yyyy' ))
+  })
+  return updatedNotes
+}
+
 componentDidMount() {
   this.setState({ error: null })
   //getting the folders
@@ -132,9 +144,14 @@ componentDidMount() {
     })
     .then(res => res.json())
     .then(data => {
-      //console.log(data);
+      const updatedNotes = this.formatDate(data);
+      /*const updatedNotes = data.map(note=>note={
+        ...note, 
+        date_modified:(format (new Date((note.date_modified).slice(0,10)), 'MMM yyyy' ))
+      })*/
       this.setState({
-        notes:data,
+        //notes:data,
+        notes:updatedNotes,
        });
     })
     .catch(err => {

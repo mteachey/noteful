@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-//import { format } from 'date-fns'
 import NotefulContext from '../NotefulContext.js'
 import DeleteButton from '../DeleteButton/DeleteButton';
 import './NoteList.css';
@@ -22,8 +21,7 @@ class NoteList extends Component {
      }
      else{
        //folder_id was folderId
-        selectedNotesObj = notesObj.filter(note=>note.folder_id===folderSelected);
-        
+        selectedNotesObj = notesObj.filter(note=>note.folder_id===folderSelected);        
      }
 
     return (
@@ -32,6 +30,7 @@ class NoteList extends Component {
         <NavLink to={`/add-note`}><button className="NoteList__button add_note">Add Note</button></NavLink>   
         <ul>
         {selectedNotesObj.map(note =>
+         
           <li key={note.id} className="NoteList__note-item note-item">    
             <div className="NoteList__note-item-info ">
                 <h3>
@@ -41,7 +40,7 @@ class NoteList extends Component {
 
                     </Link>
                 </h3>
-                <p>Date modified {/*format(new Date(note.modified), 'MMM yyyy')*/}</p>
+                <p>Date modified {note.date_modified}</p>
             </div>
             <DeleteButton
                   noteId={note.id}

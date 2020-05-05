@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-//import { format } from 'date-fns'
 import './NoteItem.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import NotefulContext from '../NotefulContext.js';
@@ -22,19 +21,23 @@ class NoteItem extends Component{
   render(){
        const { noteId } = this.props.match.params
        const notesObj = this.context.notes;
-      
-       
+            
        const notesItem = notesObj.find(n =>
-           n.id === Number(noteId)
-         )
-        console.log(notesItem)
-        
+        n.id === Number(noteId)
+      ) || {}
+    
+      /*a date value until the data is fetched*/
+     /* let date = '2020-01-01'
+      if(notesItem.date_modified){
+        console.log(`hmm`)
+      date = notesItem.date_modified.slice(0,10)}*/
+             
         return (
           <section className='NoteItem__note-item'>
             <div className="note-item">
                 <div>
-                    <h2>{/*notesItem.note_name*/}</h2>
-                    <p>{/*format(new Date(notesItem.date_modified), 'MMM yyyy')*/}
+                    <h2>{notesItem.note_name}</h2>
+                    <p>{notesItem.date_modified}
                     </p>
                 </div>
                 <DeleteButton
@@ -42,7 +45,7 @@ class NoteItem extends Component{
                   push={this.props.history.push}
                  />
             </div>
-            <p>{/*notesItem.content*/}</p>
+            <p>{notesItem.content}</p>
           </section>
         );
 
