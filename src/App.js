@@ -11,6 +11,7 @@ import NotefulContext from './NotefulContext.js';
 import NoteListError from './ErrorBoundaries/NoteListError.js'
 import SidebarError from './ErrorBoundaries/SidebarError.js'
 import NOTES from './notes.js'
+import config from './config.js'
 
 
 class App extends Component{
@@ -100,11 +101,13 @@ formatDate = (notes)=>{
 
 componentDidMount() {
   this.setState({ error: null })
+  console.log(`${config.API_KEY}`)
   //getting the folders
     fetch(`http://localhost:8000/api/folders/`,{
     method: 'GET',
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': `Bearer ff811326-8cbd-11ea-bc55-0242ac130003`
     },
   })
     .then(res => {
@@ -130,7 +133,8 @@ componentDidMount() {
     fetch(`http://localhost:8000/api/notes/`,{
     method: 'GET',
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': `Bearer ff811326-8cbd-11ea-bc55-0242ac130003`
     },
   })
     .then(res => {

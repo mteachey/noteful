@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ValidationError from "../ValidationError/ValidationError.js";
 import NotefulContext from '../NotefulContext.js'
 import './AddNote.css'
+import config from '../config.js'
 
 
 class AddNote extends Component {
@@ -55,7 +56,8 @@ class AddNote extends Component {
             method: 'POST',
             body: JSON.stringify(note),
              headers: {
-             'content-type': 'application/json'
+             'content-type': 'application/json',
+             'Authorization': `Bearer ${config.API_KEY}`
             },
         })
           .then(res => {
