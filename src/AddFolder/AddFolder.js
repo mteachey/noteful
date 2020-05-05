@@ -30,11 +30,12 @@ class AddFolder extends Component {
         //const newName = name.value
         console.log('Name: ', name.value);
         const folder = {
-            name:name.value,
+            folder_name:name.value,
           }
         this.setState({ error: null })
 
-        fetch(`http://localhost:9090/folders/`, {
+        fetch(`http://localhost:8000/api/folders/`,{
+      //  fetch(`http://localhost:9090/folders/`, {
             method: 'POST',
             body: JSON.stringify(folder),
              headers: {

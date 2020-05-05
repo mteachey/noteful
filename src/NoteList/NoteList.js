@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { format } from 'date-fns'
+//import { format } from 'date-fns'
 import NotefulContext from '../NotefulContext.js'
 import DeleteButton from '../DeleteButton/DeleteButton';
-//import NoteItem from '../NoteItem/NoteItem';
 import './NoteList.css';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -22,25 +21,27 @@ class NoteList extends Component {
         folderToGoBackTo = 'All';
      }
      else{
-        selectedNotesObj = notesObj.filter(note=>note.folderId===folderSelected);
+       //folder_id was folderId
+        selectedNotesObj = notesObj.filter(note=>note.folder_id===folderSelected);
         
      }
 
     return (
       <section className='NoteList'>
         <h2>Notes</h2>
+        <NavLink to={`/add-note`}><button className="NoteList__button add_note">Add Note</button></NavLink>   
         <ul>
         {selectedNotesObj.map(note =>
           <li key={note.id} className="NoteList__note-item note-item">    
             <div className="NoteList__note-item-info ">
                 <h3>
                     <Link to={`/note/${note.id}`}
-                        onClick={() => this.context.handleNoteSelected('note', note.folderId, folderToGoBackTo)}> 
-                        {note.name}
+                        onClick={() => this.context.handleNoteSelected('note', note.folder_id, folderToGoBackTo)}> 
+                        {note.note_name}
 
                     </Link>
                 </h3>
-                <p>Date modified {format(new Date(note.modified), 'MMM yyyy')}</p>
+                <p>Date modified {/*format(new Date(note.modified), 'MMM yyyy')*/}</p>
             </div>
             <DeleteButton
                   noteId={note.id}
@@ -49,7 +50,7 @@ class NoteList extends Component {
           </li>
         )}
         </ul>
-        <NavLink to={`/add-note`}><button className="NoteList__button add_note">Add Note</button></NavLink>      
+          
       </section>
     );
   }

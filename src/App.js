@@ -60,8 +60,6 @@ updateSidebarDisplay=display=> {
     })
 }
 
-
-
 handleNoteSelected=(display,folderId, folderToGoBackTo)=>{
   this.updateSidebarDisplay(display)
   this.updatefolderOfCurrentNote(folderId)
@@ -91,7 +89,8 @@ deleteNote = (noteId,error) => {
 componentDidMount() {
   this.setState({ error: null })
   //getting the folders
-  fetch(`http://localhost:9090/folders`, {
+  //fetch(`http://localhost:9090/folders`, {
+    fetch(`http://localhost:8000/api/folders/`,{
     method: 'GET',
     headers: {
       'content-type': 'application/json'
@@ -118,7 +117,8 @@ componentDidMount() {
     });
 
     //getting the notes
-    fetch(`http://localhost:9090/notes`, {
+    fetch(`http://localhost:8000/api/notes/`,{
+    //fetch(`http://localhost:9090/notes`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json'

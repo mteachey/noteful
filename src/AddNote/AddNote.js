@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { format } from 'date-fns';
+//import { format } from 'date-fns';
 import ValidationError from "../ValidationError/ValidationError.js";
 import NotefulContext from '../NotefulContext.js'
 import './AddNote.css'
@@ -44,18 +44,19 @@ class AddNote extends Component {
         // get the form fields from the event
         const {name, content, folderChoice} = e.target;
         console.log(`this is the folderChoice value ${folderChoice.value}`)
-        const date=format(new Date(), 'MMM yyyy');
+        //const date=format(new Date(), 'MMM yyyy');
 
         const note = {
-            name:name.value,
+            note_name:name.value,
             content:content.value,
-            folderId:folderChoice.value,
-            modified:date,
+            folder_id:folderChoice.value,
+            //modified:date,
           }
        
       this.setState({ error: null })
 
-      fetch(`http://localhost:9090/notes/`, {
+      fetch(`http://localhost:8000/api/notes/`,{
+     // fetch(`http://localhost:9090/notes/`, {
             method: 'POST',
             body: JSON.stringify(note),
              headers: {
@@ -125,7 +126,7 @@ class AddNote extends Component {
 
      
      const folderOptions = folderObj.map((folder,i)=>
-            <option value={folder.id} key={i}>{folder.name}</option>);
+            <option value={folder.id} key={i}>{folder.folder_name}</option>);
       
       return (
         <form className="add-note-form" onSubmit={e => this.handleSubmit(e)}>

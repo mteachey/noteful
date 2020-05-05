@@ -5,7 +5,8 @@ import NotefulContext from '../NotefulContext.js';
 
 function deleteNoteRequest(noteId, callback){
     let error = null;
-  fetch(`http://localhost:9090/notes/${noteId}`, {
+  fetch(`http://localhost:8000/api/notes/${noteId}`,{
+  //fetch(`http://localhost:9090/notes/${noteId}`, {
     method: 'DELETE',
     headers: {
       'content-type': 'application/json'
@@ -18,10 +19,12 @@ function deleteNoteRequest(noteId, callback){
           // then throw it
           throw error
         })
-      }
-      return res.json()
-    })
-    .then(data => {
+      }//end of if
+      return (res=>{
+        console.log(`did we make it here`)
+        res.json()})
+    })//end of them
+    .then(() => {
       // call the callback when the request is successful
       // this is where the App component can remove it from state      
       callback(noteId, error)

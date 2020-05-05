@@ -18,20 +18,22 @@ class Sidebar extends Component {
         <h2>Folders</h2>
         <ul className="FolderList__list">
         {folderObj.map(folder =>
+         <li className="FolderList__folder-item"
+         onClick={() => this.context.updateFolderSelected(folder.id)}>   
             <NavLink to={`/folder/${folder.id}`} key={folder.id} >
-                <li className="FolderList__folder-item"
-                    onClick={() => this.context.updateFolderSelected(folder.id)}>           
-                    {folder.name}                    
-                </li>
+                       
+                    {folder.folder_name}                    
+              
             </NavLink>
+            </li>
         )}
         </ul>
         <NavLink to={`/add-folder`}><button className="Sidebar__button add_button">Add Folder</button></NavLink>
       </div>
     );}
     else{
-      
-      let folderSelectedName = folderObj[folderObj.map(folder => folder.id).findIndex((f,i)=> f===folderOfCurrentNote)].name;
+      //the folder_name was just name
+      let folderSelectedName = folderObj[folderObj.map(folder => folder.id).findIndex((f,i)=> f===folderOfCurrentNote)].folder_name;
  
         return(
             <div className='Sidebar'>
