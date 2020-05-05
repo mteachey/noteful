@@ -26,12 +26,6 @@ class NoteItem extends Component{
         n.id === Number(noteId)
       ) || {}
     
-      /*a date value until the data is fetched*/
-     /* let date = '2020-01-01'
-      if(notesItem.date_modified){
-        console.log(`hmm`)
-      date = notesItem.date_modified.slice(0,10)}*/
-             
         return (
           <section className='NoteItem__note-item'>
             <div className="note-item">

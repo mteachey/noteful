@@ -20,7 +20,6 @@ class NoteList extends Component {
         folderToGoBackTo = 'All';
      }
      else{
-       //folder_id was folderId
         selectedNotesObj = notesObj.filter(note=>note.folder_id===folderSelected);        
      }
 

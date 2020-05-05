@@ -6,7 +6,6 @@ import NotefulContext from '../NotefulContext.js';
 function deleteNoteRequest(noteId, callback){
     let error = null;
   fetch(`http://localhost:8000/api/notes/${noteId}`,{
-  //fetch(`http://localhost:9090/notes/${noteId}`, {
     method: 'DELETE',
     headers: {
       'content-type': 'application/json'

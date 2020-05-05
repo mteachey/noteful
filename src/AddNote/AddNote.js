@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-//import { format } from 'date-fns';
 import ValidationError from "../ValidationError/ValidationError.js";
 import NotefulContext from '../NotefulContext.js'
 import './AddNote.css'
@@ -43,20 +42,16 @@ class AddNote extends Component {
         e.preventDefault();
         // get the form fields from the event
         const {name, content, folderChoice} = e.target;
-        console.log(`this is the folderChoice value ${folderChoice.value}`)
-        //const date=format(new Date(), 'MMM yyyy');
 
         const note = {
             note_name:name.value,
             content:content.value,
             folder_id:folderChoice.value,
-            //modified:date,
           }
        
       this.setState({ error: null })
 
       fetch(`http://localhost:8000/api/notes/`,{
-     // fetch(`http://localhost:9090/notes/`, {
             method: 'POST',
             body: JSON.stringify(note),
              headers: {
@@ -77,11 +72,9 @@ class AddNote extends Component {
             name.value = '';
             content.value='';
             folderChoice.value="";
-            console.log('post worked');
-            console.log(data);
             this.props.history.push('/')
             this.context.addNote(data);
-            console.log(`just checking`)
+            
           })
           .catch(error => {
               this.setState({ error })
@@ -111,7 +104,6 @@ class AddNote extends Component {
 
     validateFolderSelected() {
         const folderChoice = this.state.folderChoice.value;
-        console.log(`this is the folderChoice ${folderChoice}`);
         if (!folderChoice) {
             return "Please choose a folder to put your new note in";
         } 
@@ -123,9 +115,8 @@ class AddNote extends Component {
       const contentError = this.validateContent();
       
       const folderObj = this.context.folders;
-
-     
-     const folderOptions = folderObj.map((folder,i)=>
+    
+      const folderOptions = folderObj.map((folder,i)=>
             <option value={folder.id} key={i}>{folder.folder_name}</option>);
       
       return (

@@ -27,7 +27,6 @@ class AddFolder extends Component {
         e.preventDefault();
         // get the form fields from the event
         const {name} = e.target;
-        //const newName = name.value
         console.log('Name: ', name.value);
         const folder = {
             folder_name:name.value,
@@ -35,7 +34,6 @@ class AddFolder extends Component {
         this.setState({ error: null })
 
         fetch(`http://localhost:8000/api/folders/`,{
-      //  fetch(`http://localhost:9090/folders/`, {
             method: 'POST',
             body: JSON.stringify(folder),
              headers: {
@@ -54,11 +52,8 @@ class AddFolder extends Component {
           })
           .then(data => {
             name.value = '';
-            console.log('post worked');
-            console.log(data);
             this.props.history.push('/')
             this.context.addFolder(data);
-            console.log(`just checking`)
           })
           .catch(error => {
             this.setState({ error })

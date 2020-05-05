@@ -36,6 +36,7 @@ addFolder = folder => {
 }
 
 addNote = note => {
+  //format the date
   let updatedNote = note = { ...note, 
     date_modified:(format (new Date((note.date_modified).slice(0,10)), 'MMM yyyy' ))}
    
@@ -76,8 +77,7 @@ deleteNote = (noteId,error) => {
     this.updateSidebarDisplay('folders');
     const newNotes = this.state.notes.filter(n =>
     n.id !== noteId
-    )
-    
+    )    
     this.setState({
       notes: newNotes
     })
@@ -101,7 +101,6 @@ formatDate = (notes)=>{
 componentDidMount() {
   this.setState({ error: null })
   //getting the folders
-  //fetch(`http://localhost:9090/folders`, {
     fetch(`http://localhost:8000/api/folders/`,{
     method: 'GET',
     headers: {
@@ -116,7 +115,6 @@ componentDidMount() {
     })
     .then(res => res.json())
     .then(data => {
-      //console.log(data);
       this.setState({
         folders:data,
        });
@@ -130,7 +128,6 @@ componentDidMount() {
 
     //getting the notes
     fetch(`http://localhost:8000/api/notes/`,{
-    //fetch(`http://localhost:9090/notes`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json'
@@ -144,13 +141,9 @@ componentDidMount() {
     })
     .then(res => res.json())
     .then(data => {
+      //format all the dates 
       const updatedNotes = this.formatDate(data);
-      /*const updatedNotes = data.map(note=>note={
-        ...note, 
-        date_modified:(format (new Date((note.date_modified).slice(0,10)), 'MMM yyyy' ))
-      })*/
       this.setState({
-        //notes:data,
         notes:updatedNotes,
        });
     })
@@ -164,7 +157,6 @@ componentDidMount() {
 
 
   render(){
-   //const {folderSelected, sideBarType,folderOfCurrentNote} = this.state
    const contextValue ={
          notes:this.state.notes,
          folders:this.state.folders,
