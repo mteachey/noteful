@@ -29,11 +29,9 @@ class App extends Component{
   }
 
 addFolder = folder => {
-  console.log(`before update ${this.state.folders}`);
     this.setState({
       folders: [ ...this.state.folders, folder ],
     })
-    console.log(`after update ${this.state.folders}`);
 }
 
 addNote = note => {
@@ -44,7 +42,6 @@ addNote = note => {
    this.setState({
       notes: [ ...this.state.notes, updatedNote ],
     })
-    console.log(`after update ${this.state.notes}`);
 }
 
 updateFolderSelected=folder=> {
@@ -91,7 +88,6 @@ deleteNote = (noteId,error) => {
 }
 
 formatDate = (notes)=>{
-  console.log(`formatdate ran`)
   let updatedNotes = notes.map(note=>note={
     ...note, 
     date_modified:(format (new Date((note.date_modified).slice(0,10)), 'MMM yyyy' ))
@@ -102,7 +98,7 @@ formatDate = (notes)=>{
 componentDidMount() {
   this.setState({ error: null })
   //getting the folders
-    fetch(`http://localhost:8000/api/folders/`,{
+    fetch(`${config.API_ENDPOINT}api/folders/`,{
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -122,14 +118,14 @@ componentDidMount() {
        });
     })
     .catch(err => {
-      console.log(`there was an error`)
       this.setState({
        error: err.message
        });
     });
 
     //getting the notes
-    fetch(`http://localhost:8000/api/notes/`,{
+    
+    fetch(`${config.API_ENDPOINT}api/notes/`,{
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -151,7 +147,6 @@ componentDidMount() {
        });
     })
     .catch(err => {
-      console.log(`there was an error`)
        this.setState({
         error: err.message
         });

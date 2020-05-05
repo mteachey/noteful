@@ -6,7 +6,7 @@ import config from '../config.js'
 
 function deleteNoteRequest(noteId, callback){
     let error = null;
-  fetch(`http://localhost:8000/api/notes/${noteId}`,{
+    fetch(`${config.API_ENDPOINT}api/notes/${noteId}`,{
     method: 'DELETE',
     headers: {
       'content-type': 'application/json',
@@ -22,7 +22,6 @@ function deleteNoteRequest(noteId, callback){
         })
       }//end of if
       return (res=>{
-        console.log(`did we make it here`)
         res.json()})
     })//end of them
     .then(() => {

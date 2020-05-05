@@ -28,13 +28,12 @@ class AddFolder extends Component {
         e.preventDefault();
         // get the form fields from the event
         const {name} = e.target;
-        console.log('Name: ', name.value);
         const folder = {
             folder_name:name.value,
           }
         this.setState({ error: null })
 
-        fetch(`http://localhost:8000/api/folders/`,{
+        fetch(`${config.API_ENDPOINT}api/folders/`,{
             method: 'POST',
             body: JSON.stringify(folder),
              headers: {

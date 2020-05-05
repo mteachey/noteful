@@ -52,7 +52,7 @@ class AddNote extends Component {
        
       this.setState({ error: null })
 
-      fetch(`http://localhost:8000/api/notes/`,{
+      fetch(`${config.API_ENDPOINT}api/notes/`,{
             method: 'POST',
             body: JSON.stringify(note),
              headers: {
