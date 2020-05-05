@@ -101,13 +101,12 @@ formatDate = (notes)=>{
 
 componentDidMount() {
   this.setState({ error: null })
-  console.log(`${config.API_KEY}`)
   //getting the folders
     fetch(`http://localhost:8000/api/folders/`,{
     method: 'GET',
     headers: {
       'content-type': 'application/json',
-      'Authorization': `Bearer ff811326-8cbd-11ea-bc55-0242ac130003`
+      'Authorization': `Bearer ${config.API_KEY}`
     },
   })
     .then(res => {
@@ -134,7 +133,7 @@ componentDidMount() {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
-      'Authorization': `Bearer ff811326-8cbd-11ea-bc55-0242ac130003`
+      'Authorization': `Bearer ${config.API_KEY}`
     },
   })
     .then(res => {
