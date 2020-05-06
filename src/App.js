@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route, Link } from 'react-router-dom';
 import './App.css';
-import { format } from 'date-fns'
+//import { format } from 'date-fns'
 import Sidebar from './Sidebar/Sidebar';
 import NoteList from './NoteList/NoteList';
 import NoteItem from './NoteItem/NoteItem';
@@ -37,7 +37,8 @@ addFolder = folder => {
 addNote = note => {
   //format the date
   let updatedNote = note = { ...note, 
-    date_modified:(format (new Date((note.date_modified).slice(0,10)), 'MMM yyyy' ))}
+    date_modified:(note.date_modified).slice(0,10)
+    }
    
    this.setState({
       notes: [ ...this.state.notes, updatedNote ],
@@ -92,9 +93,10 @@ deleteNote = (noteId,error) => {
 }
 
 formatDate = (notes)=>{
+
   let updatedNotes = notes.map(note=>note={
     ...note, 
-    date_modified:(format (new Date((note.date_modified).slice(0,10)), 'MMM yyyy' ))
+    date_modified:(note.date_modified).slice(0,10)
   })
   return updatedNotes
 }
