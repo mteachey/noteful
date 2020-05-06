@@ -5,6 +5,7 @@ import config from '../config.js'
 
 
 function deleteNoteRequest(noteId, callback){
+    
     let error = null;
     fetch(`${config.API_ENDPOINT}api/notes/${noteId}`,{
     method: 'DELETE',
@@ -26,8 +27,8 @@ function deleteNoteRequest(noteId, callback){
     })//end of them
     .then(() => {
       // call the callback when the request is successful
-      // this is where the App component can remove it from state      
-      callback(noteId, error)
+      // this is where the App component can remove it from state   
+       callback(noteId, error)
     })
     .catch(error => {
        callback(noteId, error)
