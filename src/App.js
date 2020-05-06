@@ -73,15 +73,13 @@ handleNoteSelected=(display,folderId, folderToGoBackTo)=>{
 deleteNote = (noteId,error) => {
    
   if (!error){
-    console.log(`this is # of notes before remove ${(this.state.notes).length} id of note to be deleted${noteId}`) 
-
+    
     this.updateSidebarDisplay('folders');
 
     const newNotes = this.state.notes.filter(n =>
-    n.id !== noteId
+    n.id !== Number(noteId)
     )    
-    console.log(`this is # of notes (newNotes) after ${(newNotes).length}`) 
-
+    
     this.setState({
       notes: newNotes
     })
