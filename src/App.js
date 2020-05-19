@@ -104,6 +104,7 @@ formatDate = (notes)=>{
 componentDidMount() {
   this.setState({ error: null })
   //getting the folders
+  
     fetch(`${config.API_ENDPOINT}api/folders/`,{
     method: 'GET',
     headers: {
