@@ -9,23 +9,36 @@
 }
 
 .FolderList__folder-item{
-   border:1px solid #000;
-   margin:2px 0px;
+   border:1px solid #fff;
+   margin:4px 2px;
    text-transform: uppercase;
 }
 
+.FolderList__folder-item:hover{
+    border:4px solid #fff;
+
+ }
+
 .FolderList__list  a{
-    color:#000;
+    color:#291622;
     text-decoration: none;
     width: 100%;
     display: inline-block;
     height: 100%;
     padding: 1em;
+    background-color:#8C848B;
 }
 
 .FolderList__list  a.active li{
     background-color: black;
     color: #fff;
+    background-color: #291622;
+}
+
+.FolderList__list a.active {
+    background-color: #291622; 
+    color:#fff;   
+    font-size: 1.2em;
 }
 
 .Sidebar__button{

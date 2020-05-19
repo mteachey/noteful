@@ -1,3 +1,13 @@
+/*colors
+dark-maroon:#291622
+lighter-marron:#3d2839
+black-ish:#0c050c;
+gray:#8c848b
+darkgrayblue:#153a54
+medgrayblue:#346180;
+lightgrayblue:#618eab
+lightest:#9cc1d6
+*/
 .App {
   text-align: center; 
   margin:auto 1em; 
@@ -7,6 +17,7 @@ main{
   display:flex;
   justify-content:space-between;
   flex-wrap:wrap;
+  flex-direction: column-reverse;
   border:1px #000 solid;
   font-family:"Segoe UI", 'Roboto', sans-serif;
 
@@ -24,13 +35,15 @@ ul{
 }
 
 header {
-  background-color: lightgray;
+  background-color: #291622;
+  color:#fff;
   padding: 1em 0;
+  border-bottom:1px solid #fff;
 }
 
 header a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
 
 button {
@@ -42,15 +55,38 @@ button {
   margin: 10px auto;
 }
 
+button:hover {
+  background-color: #8c848b;
+  color: #fff;
+ 
+}
+
 a:-webkit-any-link{
   color:#000;
+}
+
+header a:-webkit-any-link{
+  color:#fff;
+}
+header a:-webkit-any-link:hover{
+border-bottom:2px solid #fff;
 }
 
 .Noteful__error {
   color: red;
 }
 
-@media only screen and (min-width:960px){
+.main-sidebar{
+  background-color:#3d2839;
+  color:#fff;
+  width:100%;
+}
+
+@media only screen and (min-width:760px){
+  main{
+  flex-direction: row;
+  }
+
   .main-sidebar{
     width:30%;
     border-right:1px #000 solid;

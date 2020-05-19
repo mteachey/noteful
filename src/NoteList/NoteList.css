@@ -11,6 +11,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color:#291622;
+    color:#fff;
+}
+
+.note-item a:-webkit-any-link{
+    color:#fff;
 }
 
 .NoteList__button{
